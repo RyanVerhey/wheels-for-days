@@ -20,7 +20,7 @@ class WheelPage extends React.Component<WheelPageProps, WheelPageState> {
 
     this.state = {
       wheelTitle: "New Wheel",
-      wheelSections: ["Add more!"]
+      wheelSections: ["Add more sections!", "And even more!"]
     }
   }
 
