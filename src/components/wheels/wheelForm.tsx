@@ -8,7 +8,7 @@ interface WheelFormProps {
 export default function WheelForm(props: WheelFormProps) {
   return (
     <div className='wheelForm'>
-      <textarea 
+      <textarea
         value={props.sections.join(String.fromCharCode(13, 10))}
         onChange={(event) => props.onUpdate(event.target.value.split(/\r?\n/))}
       />
