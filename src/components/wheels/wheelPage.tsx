@@ -4,15 +4,17 @@ import { Router, RouteComponentProps, Link } from "@reach/router"
 import './wheels.css'
 import Wheel from './wheel'
 import WheelForm from './wheelForm'
+import { SectionsList } from '../interfaces'
 
 interface WheelPageProps extends RouteComponentProps {
 	// wheelId?: string;
 }
 
 interface WheelPageState {
-  wheelTitle: string
-  wheelSections: string[]
+  wheelTitle: string;
+  wheelSections: SectionsList;
 }
+
 
 class WheelPage extends React.Component<WheelPageProps, WheelPageState> {
   constructor(props: WheelPageProps) {
@@ -24,14 +26,13 @@ class WheelPage extends React.Component<WheelPageProps, WheelPageState> {
     }
   }
 
-  updateSections(sections: string[]) {
-    console.log(sections);
+  updateSections(sections: SectionsList): void {
     this.setState({
       wheelSections: sections
     });
   }
 
-  render() {
+  render(): JSX.Element {
     return (
       <div className="wheelPage">
         <h1>{this.state.wheelTitle}</h1>

@@ -1,17 +1,20 @@
 import React from 'react';
+import { SectionsList } from '../interfaces';
 
 interface WheelFormProps {
-  sections: string[]
-  onUpdate: any
+  sections: SectionsList;
+  onUpdate: (sections: SectionsList) => void;
 }
 
-export default function WheelForm(props: WheelFormProps) {
+const WheelForm: React.FunctionComponent<WheelFormProps> = ({ sections, onUpdate }): JSX.Element => {
   return (
     <div className='wheelForm'>
       <textarea
-        value={props.sections.join(String.fromCharCode(13, 10))}
-        onChange={(event) => props.onUpdate(event.target.value.split(/\r?\n/))}
+        value={sections.join(String.fromCharCode(13, 10))}
+        onChange={(event: React.ChangeEvent<HTMLTextAreaElement>) => onUpdate(event.target.value.split(/\r?\n/))}
       />
     </div>
   );
 }
+
+export default WheelForm;
