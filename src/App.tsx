@@ -11,7 +11,7 @@ function App() {
       <Router>
         <LandingPage path="/" />
         <WheelPage path="/new" />
-        <WheelPage path="/wheel/:wheelId" />
+        {/* <WheelPage path="/wheel/:wheelId" /> */}
       </Router>
     </Layout>
   );
