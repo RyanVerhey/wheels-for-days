@@ -32,13 +32,17 @@ class WheelPage extends React.Component<WheelPageProps, WheelPageState> {
     });
   }
 
+  sanitizedSections(): SectionsList {
+    return this.state.wheelSections.filter(section => section.length)
+  }
+
   render(): JSX.Element {
     return (
       <div className="wheelPage">
         <h1>{this.state.wheelTitle}</h1>
-        <Wheel title={this.state.wheelTitle} sections={this.state.wheelSections} />
+        <Wheel title={this.state.wheelTitle} sections={this.sanitizedSections()} />
         <WheelForm sections={this.state.wheelSections}
-                   onUpdate={(sections: string[]) => this.updateSections(sections)} />
+                   onUpdate={(sections: SectionsList) => this.updateSections(sections)} />
       </div>
     );
   }
