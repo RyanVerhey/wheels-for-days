@@ -15,25 +15,23 @@ interface WheelProps {
   sections: SectionsList;
 }
 
-class Wheel extends React.Component<WheelProps> {
-  canvasDimensions: number;
+const WheelElement: React.FC<WheelProps> = (props) => {
+  const canvasDimensions: number = 150;
 
-  constructor(props: WheelProps) {
-    super(props);
-    // Width and height are the same, it's a square
-    this.canvasDimensions = 150;
-  }
+  React.useEffect(() => {
+    drawWheel();
+  })
 
-  drawWheel(): void|null {
+  const drawWheel = (): void|null => {
     const canvas = document.getElementById('wheel') as HTMLCanvasElement;
-    if (canvas === null || !canvas.getContext) { return null }
+    if (canvas === null || !canvas.getContext) return null;
     const ctx = canvas.getContext('2d');
-    if (ctx === null) { return null }
-    const wheelCenterX: number = this.canvasDimensions / 2;
-    const wheelCenterY: number = this.canvasDimensions / 2;
-    const wheelRadius: number = this.canvasDimensions / 2;
+    if (ctx === null) return null;
+    const wheelCenterX: number = canvasDimensions / 2;
+    const wheelCenterY: number = canvasDimensions / 2;
+    const wheelRadius: number = canvasDimensions / 2;
 
-    if (!this.props.sections.length) {
+    if (!props.sections.length) {
       // Drawing wheel when sections aren't available
 
       // Creating the wheel
@@ -49,8 +47,8 @@ class Wheel extends React.Component<WheelProps> {
 
     const sectionColors: string[] = ["red", "orange", "yellow", "green", "blue", "indigo", "violet"];
     // Create array of start points to arc and iterate through them. Iterate through colors too?
-    const sections = this.props.sections.map((sectionName: string, index: number) => {
-      const numberOfSections: number = this.props.sections.length;
+    const sections = props.sections.map((sectionName: string, index: number) => {
+      const numberOfSections: number = props.sections.length;
 
       // The angle/length in radians of each section of the wheel's circumference
       const sectionLengthRadians: number = Math.PI * ((1/numberOfSections) * 2);
@@ -87,17 +85,11 @@ class Wheel extends React.Component<WheelProps> {
     });
   }
 
-  // Drawing and re-drawing the wheel
-  componentDidMount(): void { this.drawWheel() }
-  componentDidUpdate(): void { this.drawWheel() }
-
-  render(): JSX.Element {
-    return (
-      <canvas style={{border: "1px solid black"}} id='wheel' height={this.canvasDimensions} width={this.canvasDimensions}>
-        Upgrade your browser
-      </canvas>
-    )
-  }
+  return (
+    <canvas style={{border: "1px solid black"}} id='wheel' height={canvasDimensions} width={canvasDimensions}>
+      Upgrade your browser
+    </canvas>
+  )
 }
 
-export default Wheel;
+export default WheelElement;

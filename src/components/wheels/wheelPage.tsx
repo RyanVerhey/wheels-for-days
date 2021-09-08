@@ -10,42 +10,22 @@ interface WheelPageProps extends RouteComponentProps {
 	// wheelId?: string;
 }
 
-interface WheelPageState {
-  wheelTitle: string;
-  wheelSections: SectionsList;
-}
+const WheelPage: React.FC<WheelPageProps> = (props) => {
+  const [wheelTitle, setWheelTitle] = React.useState<string>("New Wheel");
+  const [wheelSections, setWheelSections] = React.useState<SectionsList>(["Add more sections!", "And even more!"])
 
-
-class WheelPage extends React.Component<WheelPageProps, WheelPageState> {
-  constructor(props: WheelPageProps) {
-    super(props);
-
-    this.state = {
-      wheelTitle: "New Wheel",
-      wheelSections: ["Add more sections!", "And even more!"]
-    }
+  const sanitizedSections = (): SectionsList => {
+    return wheelSections.filter(section => section.length)
   }
 
-  updateSections(sections: SectionsList): void {
-    this.setState({
-      wheelSections: sections
-    });
-  }
-
-  sanitizedSections(): SectionsList {
-    return this.state.wheelSections.filter(section => section.length)
-  }
-
-  render(): JSX.Element {
-    return (
-      <div className="wheelPage">
-        <h1>{this.state.wheelTitle}</h1>
-        <Wheel title={this.state.wheelTitle} sections={this.sanitizedSections()} />
-        <WheelForm sections={this.state.wheelSections}
-                   onUpdate={(sections: SectionsList) => this.updateSections(sections)} />
-      </div>
-    );
-  }
+  return (
+    <div className="wheelPage">
+      <h1>{wheelTitle}</h1>
+      <Wheel title={wheelTitle} sections={sanitizedSections()} />
+      <WheelForm sections={wheelSections}
+                  onUpdate={setWheelSections} />
+    </div>
+  );
 }
 
 export default WheelPage;
