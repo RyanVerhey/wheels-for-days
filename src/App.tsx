@@ -10,7 +10,7 @@ function App() {
     <Layout>
       <Router>
         <LandingPage path="/" />
-        <WheelPage path="/new" />
+        <WheelPage path="/wheel" />
         {/* <WheelPage path="/wheel/:wheelId" /> */}
       </Router>
     </Layout>
