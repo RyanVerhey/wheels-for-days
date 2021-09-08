@@ -1,3 +1,4 @@
+import * as React from 'react';
 import { Router } from '@reach/router';
 
 import './App.css';
@@ -5,7 +6,7 @@ import Layout from './components/layouts/layout';
 import LandingPage from './components/landingPage/landingPage';
 import WheelPage from './components/wheels/wheelPage';
 
-function App() {
+const App: React.FC = () => {
   return (
     <Layout>
       <Router>

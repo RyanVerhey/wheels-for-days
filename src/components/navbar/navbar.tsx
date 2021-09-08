@@ -1,8 +1,9 @@
+import * as React from 'react';
 import { Link } from '@reach/router'
 
 import './navbar.css'
 
-export default function Navbar() {
+const Navbar: React.FC = () => {
   return (
     <nav>
       <Link to='/'>Home</Link>
@@ -10,3 +11,5 @@ export default function Navbar() {
     </nav>
   )
 }
+
+export default Navbar;

@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { SectionsList } from '../interfaces';
 
 interface WheelFormProps {
@@ -6,7 +6,7 @@ interface WheelFormProps {
   onUpdate: (sections: SectionsList) => void;
 }
 
-const WheelForm: React.FunctionComponent<WheelFormProps> = ({ sections, onUpdate }): JSX.Element => {
+const WheelForm: React.FC<WheelFormProps> = ({ sections, onUpdate }) => {
   return (
     <div className='wheelForm'>
       <textarea

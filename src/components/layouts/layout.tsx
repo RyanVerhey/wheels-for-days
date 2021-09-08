@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 
 import Navbar from '../navbar/navbar'
 import Footer from '../footer/footer'
@@ -7,7 +7,7 @@ export interface LayoutProps {
   children: React.ReactNode
 }
 
-export default function Layout(props: LayoutProps) {
+const Layout: React.FC<LayoutProps> = (props) => {
   return (
     <div className='container'>
       <Navbar />
@@ -16,3 +16,5 @@ export default function Layout(props: LayoutProps) {
     </div>
   )
 }
+
+export default Layout;

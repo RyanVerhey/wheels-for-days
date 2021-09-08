@@ -1,8 +1,9 @@
+import * as React from 'react';
 import { RouteComponentProps, Link } from "@reach/router"
 
 import './landingPage.css'
 
-export default function LandingPage(props: RouteComponentProps) {
+const LandingPage: React.FC<RouteComponentProps> = (props) => {
   return (
     <section className='landingPage'>
       <h1>Wheels For Days</h1>
@@ -11,3 +12,5 @@ export default function LandingPage(props: RouteComponentProps) {
     </section>
   )
 }
+
+export default LandingPage;
