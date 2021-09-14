@@ -16,17 +16,28 @@ interface WheelProps {
 }
 
 const WheelElement: React.FC<WheelProps> = (props) => {
-  const canvasDimensions: number = 150;
+  const canvasDimensions: number = 300;
 
   React.useEffect(() => {
-    drawWheel();
-  })
+    // drawWheel();
+  }, [props.sections])
 
-  const drawWheel = (): void|null => {
+  React.useEffect(() => {
+    setTimeout(() => {
+      rotateWheel();
+    }, 1000);
+  }, [props.sections])
+
+  const getCanvasContext = (): CanvasRenderingContext2D => {
     const canvas = document.getElementById('wheel') as HTMLCanvasElement;
-    if (canvas === null || !canvas.getContext) return null;
+    if (canvas === null || !canvas.getContext) throw "No canvas";
     const ctx = canvas.getContext('2d');
-    if (ctx === null) return null;
+    if (ctx === null) throw "No context";
+
+    return ctx;
+  }
+
+  const drawWheel = (ctx:CanvasRenderingContext2D = getCanvasContext()): void|null => {
     const wheelCenterX: number = canvasDimensions / 2;
     const wheelCenterY: number = canvasDimensions / 2;
     const wheelRadius: number = canvasDimensions / 2;
@@ -83,6 +94,16 @@ const WheelElement: React.FC<WheelProps> = (props) => {
 
       return section;
     });
+  }
+
+  const rotateWheel = () => {
+    const ctx = getCanvasContext();
+    ctx.clearRect(0,0,canvasDimensions,canvasDimensions);
+    drawWheel(ctx);
+    ctx.translate((canvasDimensions / 2), (canvasDimensions / 2))
+    ctx.rotate(1 * (Math.PI / 180));
+    ctx.translate(-(canvasDimensions / 2), -(canvasDimensions / 2))
+    requestAnimationFrame(rotateWheel);
   }
 
   return (
